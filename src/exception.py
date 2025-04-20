@@ -1,4 +1,10 @@
-import sys 
+import sys
+import os 
+
+# Add the root directory to sys.path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from src.logger import logging
 
 def error_message_detail(error,error_detail:sys):
     _,_,exe_tb = error_detail.exc_info()
