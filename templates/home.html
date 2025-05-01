@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Exam Performance Indicator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f1f5f9;
+      padding: 2rem;
+      margin: 0;
+    }
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0f172a;
+      margin-bottom: 2rem;
+    }
+    .card {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    .card-header {
+      background: linear-gradient(to right, #059669, #10b981);
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+    }
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    .card-header p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    form {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+      color: #1e293b;
+    }
+    select, input[type="number"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background-color: #f9fafb;
+    }
+    .full-width {
+      grid-column: span 1;
+    }
+    .button {
+      grid-column: span 2;
+      background: linear-gradient(to right, #10b981, #14b8a6);
+      color: white;
+      padding: 0.75rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: linear-gradient(to right, #0d9488, #10b981);
+    }
+    .result {
+      grid-column: span 2;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #ecfdf5;
+      border: 1px solid #d1fae5;
+      border-radius: 0.5rem;
+      font-size: 1.25rem;
+      color: #065f46;
+      text-align: center;
+    }
+    @media (max-width: 768px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      .full-width, .button, .result {
+        grid-column: span 1;
+      }
+    }
+    .required::after {
+  content: " *";
+  color: red;
+  font-weight: bold;
+}
+  </style>
+</head>
+<body>
+  <div class="title">🎓 Student Exam Performance Indicator</div>
+  <div class="card">
+    <div class="card-header">
+      <h2>🧠 Student Exam Performance Prediction</h2>
+      <p>Fill in the form below to predict your mathematics score</p>
+    </div>
+    <form id="predictionForm">
+      <div>
+        <!-- <label for="gender">Gender</label> -->
+        <label for="gender" class="required">Gender</label>
+        <select id="gender" required>
+          <option value="" >Select your gender</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div>
+        <label for="ethnicity" class="required">Race or Ethnicity</label>
+        <select id="ethnicity" required>
+          <option value="">Select ethnicity</option>
+          <option>Group A</option>
+          <option>Group B</option>
+          <option>Group C</option>
+          <option>Group D</option>
+          <option>Group E</option>
+        </select>
+      </div>
+      <div>
+        <label for="education" class="required">Parental Level of Education</label>
+        <select id="education" required>
+          <option value="">Select parent education</option>
+          <option>High school</option>
+          <option>Some high school</option>
+          <option>Some college</option>
+          <option>Associate's degree</option>
+          <option>Bachelor's degree</option>
+          <option>Master's degree</option>
+        </select>
+      </div>
+      <div>
+        <label for="lunch" class="required">Lunch Type</label>
+        <select id="lunch" required>
+          <option value="">Select lunch type</option>
+          <option>Free/reduced</option>
+          <option>Standard</option>
+        </select>
+      </div>
+      <div>
+        <label for="test" class="required">Test Preparation Course</label>
+        <select id="test" required>
+          <option value="">Select test course</option>
+          <option>None</option>
+          <option>Completed</option>
+        </select>
+      </div>
+      <div>
+        <label for="writing" class="required">Writing Score (out of 100)</label>
+        <input type="number" id="writing" min="0" max="100" required placeholder="Enter your writing score">
+      </div>
+      <div class="full-width">
+        <label for="reading" class="required">Reading Score (out of 100)</label>
+        <input type="number" id="reading" min="0" max="100" required placeholder="Enter your reading score">
+      </div>
+      <button type="submit" class="button">📊 Predict Your Math Score</button>
+      <div id="resultContainer" class="result" style="display:none;"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("predictionForm");
+    const resultContainer = document.getElementById("resultContainer");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const writing = parseInt(document.getElementById("writing").value) || 0;
+      const reading = parseInt(document.getElementById("reading").value) || 0;
+      const prediction = Math.floor((writing + reading) / 2 + Math.random() * 10);
+
+      resultContainer.style.display = "block";
+      resultContainer.innerHTML = `📘 Your predicted math score is: <strong>${prediction}</strong>`;
+    });
+  </script>
+</body>
+</html>
